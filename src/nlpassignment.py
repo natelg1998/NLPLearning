@@ -23,9 +23,11 @@ for page_count in range(pageObj):
     page_data = page.extractText()
     corpus.append(page_data)
 
-# print(corpus)
+
+
 
 sample_corpus = ' '.join(corpus)
+# print(sample_corpus)
 
 import nltk
 from nltk.tokenize import word_tokenize as wtoken
@@ -37,9 +39,11 @@ tokenize_corpus = ' '.join(tokenize_corpus)
 #Remove stop words
 from nltk.corpus import stopwords
 sw_l = stopwords.words('english')
+swl_l = sw_l + ["COVID", "COVID-19", "COVID19", "19", "misinformation", "'"]
+# print(swl_l)
 corpus_drop_stopwords = [word for word in tokenize_corpus.split() if word not in sw_l]
 corpus_drop_stopwords = ' '.join(corpus_drop_stopwords)
-# print(corpus_drop_stopwords)
+print(corpus_drop_stopwords)
 
 from nltk import wordpunct_tokenize
 corpus_wordpunct = wordpunct_tokenize(corpus_drop_stopwords)
@@ -57,7 +61,7 @@ corpus_final = regexp_tokenize(corpus_wordpunct,patn)
 #Frequency distribution
 
 frequency_dist = nltk.FreqDist(corpus_final)
-print(sorted(frequency_dist, key=frequency_dist.__getitem__,reverse=True)[0:18])
+# print(sorted(frequency_dist, key=frequency_dist.__getitem__,reverse=True)[0:18])
 
 from matplotlib import pyplot as plt
 
